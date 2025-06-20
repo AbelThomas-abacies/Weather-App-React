@@ -8,12 +8,11 @@ const View = () => {
 
   useEffect(() => {
     const weatherData = JSON.parse(localStorage.getItem("weatherData"));
-    console.log("Loaded weatherData:", weatherData); 
+    console.log("Loaded weatherData:", weatherData);
 
     if (weatherData) {
       setData(weatherData);
 
-      // Make sure weather is a string before calling toLowerCase()
       const weather = weatherData.weather?.toLowerCase() || "";
       if (weather.includes("rain")) setBgColor("#647d8e");
       else if (weather.includes("cloud")) setBgColor("#b0bed9");
@@ -41,13 +40,19 @@ const View = () => {
     <div className="font-sans m-0 p-0 box-border">
       {/* Top bar */}
       <div className="w-full h-[70px] bg-blue-600">
-        <Link to="/" className="flex justify-center items-center h-[65px] text-white text-[36px] hover:text-gray-300">
+        <Link
+          to="/"
+          className="flex justify-center items-center h-[65px] text-white text-[36px] hover:text-gray-300"
+        >
           <i className="fa fa-home text-2xl"></i>
         </Link>
       </div>
 
       {/* Weather summary card */}
-      <div className="flex justify-between items-center p-5 rounded-lg my-10 mx-auto w-[90%] h-[150px] text-white flex-wrap" style={{ backgroundColor: bgColor }}>
+      <div
+        className="flex justify-between items-center p-5 rounded-lg my-10 mx-auto w-[90%] h-[150px] text-white flex-wrap"
+        style={{ backgroundColor: bgColor }}
+      >
         <div className="ml-[50px]">
           <h1 className="text-2xl font-bold">{data.shortCode}</h1>
           <h2 className="mt-1 text-base">{`${data.city}${
@@ -69,21 +74,15 @@ const View = () => {
         <div className="flex flex-col gap-3">
           <DetailRow
             label="Humidity"
-            value={
-              data.humidity !== undefined ? `${data.humidity}%` : "N/A"
-            }
+            value={data.humidity !== undefined ? `${data.humidity}%` : "N/A"}
           />
           <DetailRow
             label="Temperature Max"
-            value={
-              data.temp_max !== undefined ? `${data.temp_max}°C` : "N/A"
-            }
+            value={data.temp_max !== undefined ? `${data.temp_max}°C` : "N/A"}
           />
           <DetailRow
             label="Temperature Min"
-            value={
-              data.temp_min !== undefined ? `${data.temp_min}°C` : "N/A"
-            }
+            value={data.temp_min !== undefined ? `${data.temp_min}°C` : "N/A"}
           />
           <DetailRow
             label="Wind"
